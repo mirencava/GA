@@ -79,7 +79,7 @@ function ud_analytics_setup(){
           <table class="form-table">
               <tr valign="top">
                   <th scope="row"><label for="UA">Código Analytics:</label></th>
-                  <td><input placeholder="Código Analytics" name="UA" id="UA" value="<?php echo esc_attr(stripslashes($options['UA']));?>"></td>
+                  <td><input placeholder="Código Analytics" name="UA" id="UA" value="<?php echo esc_attr(stripslashes($options['UA']));?>" required></td>
               </tr>
               
           </table>
