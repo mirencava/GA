@@ -14,8 +14,8 @@ function setGA()
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-136408159-1');
+    gtag("js", new Date());
+    gtag("config", "UA-136408159-1");
   </script>'; 
 
 }
