@@ -53,8 +53,17 @@ function ud_analytics_setup(){
 
     ?>
     <div id="setting-error-settings_updated" class="updated settings-error">
+    
+        <button onclick="esconderBanner()" >Cerrar</button>
         <p><strong>Configuración guardada.</strong></p>
     </div>
+    <script type="text/javascript">
+          function esconderBanner() {
+            document.getElementById("setting-error-settings_updated").style.visibility = "hidden";
+          }
+    </script> 
+
+
     <?php
   }
 
