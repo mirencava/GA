@@ -1,8 +1,7 @@
 <?php
 /*
 Plugin Name: ADD GA TAG
-Author Name: Miren 
-*/
+Author Name: Miren  Cava
 
 // Hook the 'wp_head' action hook, add the function named 'setGA' to it
 add_action("wp_head", "setGA");
