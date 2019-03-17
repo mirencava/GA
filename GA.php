@@ -37,19 +37,27 @@ function ud_analytics_init(){
 	);
 }
 
+
+
 function ud_analytics_setup(){
   $options = get_option('ud_analytics_setup');
   if(!is_array($options)){
     $options['UA'] = '';
+    $options['URL'] = '';
 
   }
 
 
+  // $_POST tenemos el control de manejar los datos que llegan del formulario
   if (isset($_POST['ud_analytics_setup_submitted']) && $_POST['ud_analytics_setup_submitted']) {
     $options['UA']   = isset($_POST['UA']) && !empty($_POST['UA']) ? $_POST['UA'] : '';
+    $options['URL']   = isset($_POST['URL']) && !empty($_POST['URL']) ? $_POST['URL'] : '';
     //Guarda valores
+    // sino existe los creas (wp_options)
+    // si existen los actualiza
     update_option('ud_analytics_setup', $options);
     error_log( $options['UA']);
+    error_log( $options['URL']);
 
     ?>
     <div id="setting-error-settings_updated" class="updated settings-error">
@@ -81,6 +89,10 @@ function ud_analytics_setup(){
                   <th scope="row"><label for="UA">Código Analytics:</label></th>
                   <td><input placeholder="Código Analytics" name="UA" id="UA" value="<?php echo esc_attr(stripslashes($options['UA']));?>" required></td>
               </tr>
+              <tr>
+              <th scope="row"><label for="URL">URL</label></th>
+              <td><input placeholder="url" name="URL" id="URL" value="<?php echo esc_attr(stripslashes($options['URL']));?>" required></td>
+              <tr>
               
           </table>
 
