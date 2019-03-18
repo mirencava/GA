@@ -5,7 +5,6 @@ Description: Inserción código Google Analytics
 Version: 1.0
 Author: Miren Cava */
 
-// Hook the 'wp_head' action hook, add the function named 'setGA' to it
 add_action("wp_head", "setGA");
 
 function setGA()
@@ -25,10 +24,8 @@ function setGA()
 
 }
 
-
 add_action('admin_menu', 'ud_analytics_init');
 
-// añade el menu en el sidebar de la izquierda
 function ud_analytics_init(){
 	add_menu_page(
 		"Google Analytics",
@@ -38,7 +35,6 @@ function ud_analytics_init(){
 		'ud_analytics_setup'
 	);
 }
-
 
 
 function ud_analytics_setup(){
@@ -52,19 +48,18 @@ function ud_analytics_setup(){
   if (isset($_POST['ud_analytics_setup_submitted']) && $_POST['ud_analytics_setup_submitted']) {
     $options['UA']   = isset($_POST['UA']) && !empty($_POST['UA']) ? $_POST['UA'] : '';
 
-    error_log('GUARDANDO UA');
     if( preg_match("/^UA-[0-9]*-[0-9]{1}/" ,$options['UA'] )>0){
       update_option('ud_analytics_setup', $options);
   
       ?>
       <div id="setting-error-settings_updated" class="updated settings-error">
       
-          <button onclick="esconderBanner()" >Cerrar</button>
+          <button onclick="borrarBanner()" >Cerrar</button>
           <p><strong>Configuración guardada.</strong></p>
       </div>
       <script type="text/javascript">
-            function esconderBanner() {
-              document.getElementById("setting-error-settings_updated").style.visibility = "hidden";
+            function borrarBanner() {
+              document.getElementById("setting-error-settings_updated").remove();
             }
       </script> 
   
@@ -94,7 +89,6 @@ function ud_analytics_setup(){
    
   }
 
-  
 	?>
   <div class="wrap">
     <div id="icon-options-general" class="icon32"><br /></div>
@@ -110,9 +104,6 @@ function ud_analytics_setup(){
               </tr>
         
           </table>
-
-
-        
           <input type="hidden" name="ud_analytics_setup_submitted" value="1" />
             <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Guardar cambios"  /></p>
     </form>
