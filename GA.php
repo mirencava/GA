@@ -11,17 +11,16 @@ add_action("wp_head", "setGA");
 function setGA()
 {
   $options = get_option('ud_analytics_setup');
-  if(isset( $options['UA']) && !empty( $options['UA'])){
-    echo '<!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id='.$options['UA'].'"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "'.$options['UA'].'");
-    </script>';
-  }
-   
+  error_log("Estamos en setGA ");
+  error_log( $options['UA']);
+  echo '<!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id='.$options['UA'].'"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "'.$options['UA'].'");
+  </script>'; 
 
 }
 
@@ -52,46 +51,22 @@ function ud_analytics_setup(){
   if (isset($_POST['ud_analytics_setup_submitted']) && $_POST['ud_analytics_setup_submitted']) {
     $options['UA']   = isset($_POST['UA']) && !empty($_POST['UA']) ? $_POST['UA'] : '';
 
-    error_log('GUARDANDO UA');
-    if( preg_match("/^UA-[0-9]*-[0-9]{1}/" ,$options['UA'] )>0){
-      update_option('ud_analytics_setup', $options);
+    update_option('ud_analytics_setup', $options);
   
-      ?>
-      <div id="setting-error-settings_updated" class="updated settings-error">
-      
-          <button onclick="esconderBanner()" >Cerrar</button>
-          <p><strong>Configuración guardada.</strong></p>
-      </div>
-      <script type="text/javascript">
-            function esconderBanner() {
-              document.getElementById("setting-error-settings_updated").style.visibility = "hidden";
-            }
-      </script> 
-  
-  
-      <?php
+    ?>
+    <div id="setting-error-settings_updated" class="updated settings-error">
+    
+        <button onclick="esconderBanner()" >Cerrar</button>
+        <p><strong>Configuración guardada.</strong></p>
+    </div>
+    <script type="text/javascript">
+          function esconderBanner() {
+            document.getElementById("setting-error-settings_updated").style.visibility = "hidden";
+          }
+    </script> 
 
-    }else {
 
-      $options['UA'] = '';
-      ?>
-      <div id="setting-error-settings_updated" class="updated settings-error">
-      
-          <button onclick="esconderBanner()" >Cerrar</button>
-          <p><strong>EL formato del código no es correcto tiene que ser: UA-XXXXXX-X</strong></p>
-      </div>
-      <script type="text/javascript">
-            function esconderBanner() {
-              document.getElementById("setting-error-settings_updated").style.visibility = "hidden";
-            }
-      </script> 
-  
-  
-      <?php
-      
-    }
-
-   
+    <?php
   }
 
   
@@ -108,7 +83,11 @@ function ud_analytics_setup(){
                   <th scope="row"><label for="UA">Código Analytics:</label></th>
                   <td><input placeholder="Código Analytics" name="UA" id="UA" value="<?php echo esc_attr(stripslashes($options['UA']));?>" required></td>
               </tr>
-        
+              <!-- <tr>
+              <th scope="row"><label for="URL">URL</label></th>
+              <td><input placeholder="url" name="URL" id="URL" value="<?php echo esc_attr(stripslashes($options['URL']));?>" required></td>
+              <tr> -->
+              
           </table>
 
 
