@@ -6,7 +6,6 @@ Author: Miren Cava */
 // Hook the 'wp_head' action hook, add the function named 'setGA' to it
 add_action("wp_head", "setGA");
 
-// UA-136408159-1
 function setGA()
 {
   $options = get_option('ud_analytics_setup');
@@ -43,22 +42,15 @@ function ud_analytics_setup(){
   $options = get_option('ud_analytics_setup');
   if(!is_array($options)){
     $options['UA'] = '';
-    $options['URL'] = '';
-
   }
 
 
   // $_POST tenemos el control de manejar los datos que llegan del formulario
   if (isset($_POST['ud_analytics_setup_submitted']) && $_POST['ud_analytics_setup_submitted']) {
     $options['UA']   = isset($_POST['UA']) && !empty($_POST['UA']) ? $_POST['UA'] : '';
-    $options['URL']   = isset($_POST['URL']) && !empty($_POST['URL']) ? $_POST['URL'] : '';
-    //Guarda valores
-    // sino existe los creas (wp_options)
-    // si existen los actualiza
-    update_option('ud_analytics_setup', $options);
-    error_log( $options['UA']);
-    error_log( $options['URL']);
 
+    update_option('ud_analytics_setup', $options);
+  
     ?>
     <div id="setting-error-settings_updated" class="updated settings-error">
     
@@ -80,7 +72,7 @@ function ud_analytics_setup(){
   <div class="wrap">
     <div id="icon-options-general" class="icon32"><br /></div>
 
-
+  
     <form action="?page=ud-google-analytics"  method="post">
          
           <h3>Configuración de Google Analytics</h3>
@@ -89,10 +81,10 @@ function ud_analytics_setup(){
                   <th scope="row"><label for="UA">Código Analytics:</label></th>
                   <td><input placeholder="Código Analytics" name="UA" id="UA" value="<?php echo esc_attr(stripslashes($options['UA']));?>" required></td>
               </tr>
-              <tr>
+              <!-- <tr>
               <th scope="row"><label for="URL">URL</label></th>
               <td><input placeholder="url" name="URL" id="URL" value="<?php echo esc_attr(stripslashes($options['URL']));?>" required></td>
-              <tr>
+              <tr> -->
               
           </table>
 
