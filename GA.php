@@ -1,6 +1,8 @@
 <?php
 /*
-Plugin Name: Google Analytics
+Plugin Name: Google Analytics-UD
+Description: Inserción código Google Analytics
+Version: 1.0
 Author: Miren Cava */
 
 // Hook the 'wp_head' action hook, add the function named 'setGA' to it
