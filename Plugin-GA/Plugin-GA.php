@@ -77,7 +77,7 @@ function ud_analytics_setup(){
       </div>
       <script type="text/javascript">
             function esconderBanner() {
-              document.getElementById("setting-error-settings_updated").style.visibility = "hidden";
+              document.getElementById("setting-error-settings_updated").remove();
             }
       </script> 
   
